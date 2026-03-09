@@ -1,0 +1,7 @@
+# Internal instructions and development files
+/instructions/
+/.claude/
+
+# Claude Code memory files
+memory/
+MEMORY.md

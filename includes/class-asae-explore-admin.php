@@ -34,21 +34,29 @@ class ASAE_Explore_Admin {
      * own submenu items under the 'asae-explore' parent slug.
      */
     public function add_settings_page() {
+        // Top-level ASAE menu — clicking it goes to the Explore settings page
         add_menu_page(
-            'ASAE Explore Settings',
+            'ASAE',
             'ASAE',
             'manage_options',
-            'asae-explore',
+            'asae',
             array($this, 'render_settings_page'),
             'dashicons-building',
             30
         );
 
-        // Rename the auto-generated first submenu item from "ASAE" to "Explore"
-        global $submenu;
-        if (isset($submenu['asae-explore'])) {
-            $submenu['asae-explore'][0][0] = 'Explore';
-        }
+        // "Explore" submenu item (different slug so WP shows it)
+        add_submenu_page(
+            'asae',
+            'ASAE Explore Settings',
+            'Explore',
+            'manage_options',
+            'asae-explore',
+            array($this, 'render_settings_page')
+        );
+
+        // Remove the auto-generated duplicate first submenu that matches the parent
+        remove_submenu_page('asae', 'asae');
     }
 
     /**

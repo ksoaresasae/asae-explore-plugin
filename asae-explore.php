@@ -3,7 +3,7 @@
  * Plugin Name: ASAE Explore
  * Plugin URI: https://www.asaecenter.org
  * Description: Loads ASAE Explore CSS and JavaScript files from CDN on all frontend pages with configurable version control.
- * Version: 0.0.11
+ * Version: 0.0.12
  * Author: Keith M. Soares
  * Author URI: https://keithmsoares.com
  * Author Email: ksoares@asaecenter.org
@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Plugin version constant (three-part M.m.p per version-numbering.md)
-define('ASAE_EXPLORE_VERSION', '0.0.11');
+define('ASAE_EXPLORE_VERSION', '0.0.12');
 define('ASAE_EXPLORE_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
 // Load plugin classes

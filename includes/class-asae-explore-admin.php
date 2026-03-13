@@ -27,52 +27,32 @@ class ASAE_Explore_Admin {
     }
 
     /**
-     * Register the admin menu page under the ASAE top-level menu.
+     * Register the ASAE top-level menu and Explore submenu page.
      *
-     * Creates the ASAE parent menu if no other ASAE plugin has registered it yet,
-     * then adds "Explore" as a submenu item.
+     * This plugin always owns the top-level ASAE menu. The parent menu slug
+     * points to the Explore settings page. Other ASAE plugins should add their
+     * own submenu items under the 'asae-explore' parent slug.
      */
     public function add_settings_page() {
-        global $menu;
+        add_menu_page(
+            'ASAE Explore Settings',
+            'ASAE',
+            'manage_options',
+            'asae-explore',
+            array($this, 'render_settings_page'),
+            'dashicons-building',
+            30
+        );
 
-        // Check whether another ASAE plugin has already registered the top-level menu
-        $asae_menu_exists = false;
-        if (is_array($menu)) {
-            foreach ($menu as $item) {
-                if (isset($item[2]) && $item[2] === 'asae') {
-                    $asae_menu_exists = true;
-                    break;
-                }
-            }
-        }
-
-        // Create the ASAE top-level menu if it doesn't exist yet
-        if (!$asae_menu_exists) {
-            add_menu_page(
-                'ASAE',
-                'ASAE',
-                'manage_options',
-                'asae',
-                '__return_null',
-                'dashicons-building',
-                30
-            );
-        }
-
-        // Add Explore as a submenu under ASAE
+        // Add Explore as the first submenu item (replaces the auto-generated duplicate)
         add_submenu_page(
-            'asae',
+            'asae-explore',
             'ASAE Explore Settings',
             'Explore',
             'manage_options',
             'asae-explore',
             array($this, 'render_settings_page')
         );
-
-        // Remove the auto-generated duplicate submenu entry when we created the parent
-        if (!$asae_menu_exists) {
-            remove_submenu_page('asae', 'asae');
-        }
     }
 
     /**

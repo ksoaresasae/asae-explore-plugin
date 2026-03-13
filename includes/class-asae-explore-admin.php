@@ -44,15 +44,11 @@ class ASAE_Explore_Admin {
             30
         );
 
-        // Add Explore as the first submenu item (replaces the auto-generated duplicate)
-        add_submenu_page(
-            'asae-explore',
-            'ASAE Explore Settings',
-            'Explore',
-            'manage_options',
-            'asae-explore',
-            array($this, 'render_settings_page')
-        );
+        // Rename the auto-generated first submenu item from "ASAE" to "Explore"
+        global $submenu;
+        if (isset($submenu['asae-explore'])) {
+            $submenu['asae-explore'][0][0] = 'Explore';
+        }
     }
 
     /**
